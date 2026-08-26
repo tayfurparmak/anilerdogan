@@ -443,29 +443,30 @@ const filteredPosts = computed(() => {
               </div>
               <USwitch v-model="isPublished" color="primary" />
             </div>
-          </form>
-        </div>
 
-        <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex space-x-3">
-          <UButton
-            color="primary"
-            block
-            size="lg"
-            :loading="isSubmitting"
-            class="rounded-full py-3 text-xs font-semibold flex-1 justify-center"
-            @click="savePost"
-          >
-            Kaydet
-          </UButton>
-          <UButton
-            variant="outline"
-            color="neutral"
-            size="lg"
-            class="rounded-full py-3 text-xs font-semibold flex-1 justify-center"
-            @click="isSlideoverOpen = false"
-          >
-            Vazgeç
-          </UButton>
+            <div class="pt-6 border-t border-slate-100 dark:border-slate-800 flex space-x-3">
+              <UButton
+                type="submit"
+                color="primary"
+                block
+                size="lg"
+                :loading="isSubmitting"
+                class="rounded-full py-3 text-xs font-semibold flex-1 justify-center"
+              >
+                Kaydet
+              </UButton>
+              <UButton
+                type="button"
+                variant="outline"
+                color="neutral"
+                size="lg"
+                class="rounded-full py-3 text-xs font-semibold flex-1 justify-center"
+                @click="isSlideoverOpen = false"
+              >
+                Vazgeç
+              </UButton>
+            </div>
+          </form>
         </div>
       </div>
     </USlideover>
