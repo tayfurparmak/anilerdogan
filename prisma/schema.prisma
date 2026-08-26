@@ -1,0 +1,149 @@
+// Prisma Schema for Anıl Erdoğan Website
+// Connects to PostgreSQL (Supabase) database
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id           String   @id @default(uuid())
+  fullName     String   @map("full_name")
+  title        String?
+  shortBio     String?  @map("short_bio")
+  bio          String?
+  profileImage String?  @map("profile_image")
+  phone        String?
+  email        String?
+  location     String?
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("profiles")
+}
+
+model Education {
+  id             String    @id @default(uuid())
+  title          String
+  institution    String
+  description    String?
+  startDate      DateTime? @map("start_date")
+  endDate        DateTime? @map("end_date")
+  certificateUrl String?   @map("certificate_url")
+  imageUrl       String?   @map("image_url")
+  sortOrder      Int       @default(0) @map("sort_order")
+  isPublished    Boolean   @default(true) @map("is_published")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  @@map("educations")
+}
+
+model Service {
+  id               String   @id @default(uuid())
+  title            String
+  slug             String   @unique
+  shortDescription String?  @map("short_description")
+  description      String?
+  imageUrl         String?  @map("image_url")
+  icon             String?
+  sortOrder        Int      @default(0) @map("sort_order")
+  isPublished      Boolean  @default(true) @map("is_published")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@map("services")
+}
+
+model BlogPost {
+  id             String    @id @default(uuid())
+  title          String
+  slug           String    @unique
+  excerpt        String?
+  content        String?
+  coverImage     String?   @map("cover_image")
+  category       String?
+  tags           String[]  @default([])
+  seoTitle       String?   @map("seo_title")
+  seoDescription String?   @map("seo_description")
+  isPublished    Boolean   @default(true) @map("is_published")
+  publishedAt    DateTime? @map("published_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  @@map("blog_posts")
+}
+
+model Testimonial {
+  id          String   @id @default(uuid())
+  name        String
+  position    String?
+  company     String?
+  content     String
+  imageUrl    String?  @map("image_url")
+  sortOrder   Int      @default(0) @map("sort_order")
+  isPublished Boolean  @default(true) @map("is_published")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("testimonials")
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("contact_messages")
+}
+
+model SocialLink {
+  id        String   @id @default(uuid())
+  platform  String
+  title     String   @default("")
+  url       String
+  icon      String?
+  sortOrder Int      @default(0) @map("sort_order")
+  isVisible Boolean  @default(true) @map("is_visible")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("social_links")
+}
+
+model SiteSettings {
+  id                    Int      @id @default(1)
+  siteName              String   @map("site_name")
+  siteDescription       String?  @map("site_description")
+  logo                  String?
+  favicon               String?
+  defaultSeoTitle       String?  @map("default_seo_title")
+  defaultSeoDescription String?  @map("default_seo_description")
+  defaultOgImage        String?  @map("default_og_image")
+  createdAt             DateTime @default(now()) @map("created_at")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+
+  @@map("site_settings")
+}
+
+model Media {
+  id        String   @id @default(uuid())
+  fileName  String   @map("file_name")
+  filePath  String   @map("file_path")
+  publicUrl String   @map("public_url")
+  mimeType  String?  @map("mime_type")
+  fileSize  Int?     @map("file_size")
+  altText   String?  @map("alt_text")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("media")
+}
