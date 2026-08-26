@@ -1,9 +1,12 @@
-import { PrismaClient } from '@prisma/client'
+import PrismaPkg from '@prisma/client'
 
-let prisma: PrismaClient
+// Robust CJS / ESM interop for Nuxt 3 Vite & Nitro runtime
+const PrismaClient = (PrismaPkg as any).PrismaClient || (PrismaPkg as any).default?.PrismaClient || PrismaPkg
+
+let prisma: any
 
 declare global {
-  var __prisma: PrismaClient | undefined
+  var __prisma: any
 }
 
 if (process.env.NODE_ENV === 'production') {
