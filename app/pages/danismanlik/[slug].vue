@@ -103,12 +103,12 @@ watchEffect(() => {
       script: [
         {
           type: 'application/ld+json',
-          children: JSON.stringify(serviceSchema)
-        },
+          innerHTML: JSON.stringify(serviceSchema)
+        } as any,
         {
           type: 'application/ld+json',
-          children: JSON.stringify(breadcrumbSchema)
-        }
+          innerHTML: JSON.stringify(breadcrumbSchema)
+        } as any
       ]
     })
   }
