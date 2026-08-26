@@ -23,12 +23,10 @@ const navigation = [
     name: 'İçerik Yönetimi',
     icon: 'i-heroicons-document-duplicate',
     children: [
-      { name: 'Ana Sayfa', to: '/admin/content/home' },
-      { name: 'Hakkımda', to: '/admin/content/about' },
-      { name: 'Eğitimler', to: '/admin/content/educations' },
+      { name: 'Blog Makaleleri', to: '/admin/content/blog' },
       { name: 'Danışmanlıklar', to: '/admin/content/services' },
-      { name: 'Blog', to: '/admin/content/blog' },
-      { name: 'Referanslar', to: '/admin/content/testimonials' }
+      { name: 'Eğitimler', to: '/admin/content/educations' },
+      { name: 'Referans Yorumları', to: '/admin/content/testimonials' }
     ]
   },
   { name: 'Medya Kütüphanesi', to: '/admin/media', icon: 'i-heroicons-photo' },

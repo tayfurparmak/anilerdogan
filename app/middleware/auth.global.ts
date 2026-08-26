@@ -4,7 +4,7 @@ export default defineNuxtRouteMiddleware((to) => {
   const isAdminRoute = to.path.startsWith('/admin')
   const isLoginRoute = to.path === '/admin/login'
 
-  const hasAdminAccess = user.value && user.value.email === 'info@anilerdogan.com'
+  const hasAdminAccess = !!user.value
 
   // Block unauthorized users from visiting protected admin paths
   if (isAdminRoute && !isLoginRoute && !hasAdminAccess) {
