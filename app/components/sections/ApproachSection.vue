@@ -2,66 +2,89 @@
 const steps = [
   {
     num: '01',
-    title: 'Tanışma ve Keşif Seansı',
+    title: 'Keşif & Ön Değerlendirme',
+    icon: 'i-heroicons-magnifying-glass',
     desc: 'İlk adımda, hedeflerinizi, mevcut zorluklarınızı ve beklentilerinizi analiz etmek için 30 dakikalık ücretsiz bir ön görüşme gerçekleştiriyoruz.'
   },
   {
     num: '02',
-    title: 'Analiz ve Yol Haritası',
-    desc: 'Mevcut durumunuzu, yetkinliklerinizi ve organizasyonel yapınızı analiz edip, size veya şirketinize özel somut bir çalışma planı ve takvimi çıkarıyoruz.'
+    title: 'Derin Analiz & Teşhis',
+    icon: 'i-heroicons-chart-bar',
+    desc: 'Mevcut durumunuzu, liderlik yetkinliklerinizi ve mimari yapınızı analiz ederek gelişim alanlarını kesin verilerle tespit ediyoruz.'
   },
   {
     num: '03',
-    title: 'Uygulama ve Koçluk Süreci',
-    desc: 'Belirlediğimiz periyotlarda birebir seanslar, atölyeler ve pratik ödevlerle süreci işletiyor; seans aralarında da mesaj / e-posta ile destek oluyorum.'
+    title: 'Stratejik Yol Haritası',
+    icon: 'i-heroicons-map',
+    desc: 'Ölçülebilir OKR ve KPI hedefleri içeren, size ve organizasyonunuza özel adım adım uygulanabilir bir aksiyon planı ve takvim çıkarıyoruz.'
   },
   {
     num: '04',
-    title: 'Değerlendirme ve Takip',
-    desc: 'Çalışma periyodu sonunda elde edilen gelişimi KPI ve OKR bazlı analiz ediyor; kazanımların kalıcı olması için takip mekanizmaları kuruyoruz.'
+    title: 'Uygulama & Koçluk',
+    icon: 'i-heroicons-fire',
+    desc: 'Periyodik birebir koçluk seansları, atölyeler ve pratik ödevlerle süreci işletiyor; seans aralarında da doğrudan iletişim desteği sunuyorum.'
+  },
+  {
+    num: '05',
+    title: 'Ölçüm & Sürdürülebilirlik',
+    icon: 'i-heroicons-arrow-trending-up',
+    desc: 'Çalışma periyodu sonunda elde edilen gelişimi analiz ediyor; kazanımların kalıcı ve organizasyonel kültüre entegre olması için takip sistemi kuruyoruz.'
   }
 ]
 </script>
 
 <template>
-  <section class="py-20 lg:py-24 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800/40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Title -->
+  <section class="py-28 bg-slate-950 text-white relative border-b border-slate-800/60 overflow-hidden">
+    <!-- Background Ambient Mesh -->
+    <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-indigo-500/5 blur-[140px] pointer-events-none" />
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Section Header -->
       <div class="text-center max-w-3xl mx-auto mb-20 space-y-4">
-        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 dark:bg-emerald-500/15 px-3 py-1 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-          <span>Metodoloji</span>
+        <div class="inline-flex items-center space-x-2 bg-slate-900 border border-cyan-500/30 px-4 py-1.5 rounded-full text-xs font-semibold text-cyan-400">
+          <UIcon name="i-heroicons-arrow-path" class="w-4 h-4" />
+          <span>Progressive Execution Methodology</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white font-serif">
-          Birlikte Nasıl Çalışacağız?
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-serif">
+          5 Adımda Stratejik Çalışma Süreci
         </h2>
-        <p class="text-slate-500 dark:text-slate-400 leading-relaxed font-sans font-light">
-          Sürdürülebilir başarı ve gelişim şans eseri değildir. Süreç odaklı yaklaşımımızla adımları planlı şekilde atıyoruz.
+        <p class="text-slate-400 text-base leading-relaxed font-light">
+          Sürdürülebilir başarı ve dönüşüm şans eseri değildir. Metodolojik ve ölçülebilir 5 aşamalı sürecimiz.
         </p>
       </div>
 
-      <!-- Steps Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-        <!-- Connecting Line for Desktop -->
-        <div class="hidden lg:block absolute top-[44px] left-[10%] right-[10%] h-[1px] bg-slate-200 dark:bg-slate-800 z-0" />
-
+      <!-- Progressive Timeline Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 relative">
         <div
           v-for="(step, idx) in steps"
           :key="idx"
-          class="relative z-10 space-y-4 flex flex-col items-center md:items-start text-center md:text-left group"
+          class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-3xl relative flex flex-col justify-between group hover:border-cyan-500/40 hover:bg-slate-900 transition-all duration-300 shadow-xl"
         >
-          <!-- Step Number Bubble -->
-          <div class="w-12 h-12 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center font-bold text-slate-400 group-hover:text-emerald-500 group-hover:border-emerald-500 transition-colors duration-300">
-            {{ step.num }}
+          <!-- Top Row: Icon & Step Number -->
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                <UIcon :name="step.icon" class="w-5 h-5" />
+              </div>
+              <span class="text-xs font-mono font-bold text-slate-500 group-hover:text-cyan-400 transition-colors">
+                STAGE {{ step.num }}
+              </span>
+            </div>
+
+            <h3 class="text-base font-bold text-white font-serif group-hover:text-cyan-300 transition-colors">
+              {{ step.title }}
+            </h3>
+
+            <p class="text-xs text-slate-400 leading-relaxed font-light">
+              {{ step.desc }}
+            </p>
           </div>
 
-          <!-- Text -->
-          <h3 class="text-lg font-bold text-slate-900 dark:text-white pt-2">
-            {{ step.title }}
-          </h3>
-          
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-light">
-            {{ step.desc }}
-          </p>
+          <!-- Bottom Status Indicator -->
+          <div class="pt-6 border-t border-slate-800/60 mt-6 flex items-center space-x-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-widest">Aşama {{ step.num }}</span>
+          </div>
         </div>
       </div>
     </div>

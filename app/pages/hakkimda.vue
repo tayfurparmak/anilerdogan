@@ -31,7 +31,7 @@ const profile = computed(() => {
       title: p.title,
       bio: p.bio,
       avatar: p.profile_image || profileData.avatar,
-      stats: profileData.stats // default fallback stats
+      stats: profileData.stats
     }
   }
   return profileData
@@ -78,7 +78,7 @@ const values = [
     desc: 'Değişen teknoloji ve yönetim pratiklerini yakından takip eder, bilgilerimi günceller ve edindiğim güncel yaklaşımları seanslarıma taşırım.'
   }
 ]
-// Set SEO Meta
+
 watchEffect(() => {
   if (profile.value) {
     const personSchema = {
@@ -95,8 +95,8 @@ watchEffect(() => {
       script: [
         {
           type: 'application/ld+json',
-          innerHTML: JSON.stringify(personSchema)
-        } as any
+          children: JSON.stringify(personSchema)
+        }
       ]
     })
   }
@@ -104,51 +104,55 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="py-12 space-y-20">
-    <!-- Intro Header -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="space-y-0 bg-slate-950 text-white min-h-screen">
+    <!-- Hero Profile Section -->
+    <section class="py-24 lg:py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         <!-- Text -->
         <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center space-x-2 bg-emerald-500/10 dark:bg-emerald-500/15 px-3 py-1 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+          <div class="inline-flex items-center space-x-2 bg-slate-900 border border-cyan-500/30 px-4 py-1.5 rounded-full text-xs font-semibold text-cyan-400">
+            <UIcon name="i-heroicons-user" class="w-4 h-4" />
             <span>Özgeçmiş & Vizyon</span>
           </div>
           
-          <h1 class="text-4xl font-extrabold text-slate-900 dark:text-white font-serif leading-tight">
-            Ben <span class="text-emerald-600 dark:text-emerald-400">{{ profile.name }}</span>. <br />
-            Liderlik ve Teknoloji Dönüşüm Ortacınızım.
+          <h1 class="text-4xl sm:text-5xl font-extrabold text-white font-serif leading-tight">
+            Ben <span class="bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">{{ profile.name }}</span>. <br />
+            Liderlik ve Teknoloji Dönüşüm Ortağınızım.
           </h1>
 
-          <p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed font-sans font-light">
-            {{ profile.title }} olarak; yöneticilere, teknoloji ve ürün takımlarına özel, sonuç odaklı modern koçluk çözümleri sunuyorum.
+          <p class="text-base text-slate-300 leading-relaxed font-sans font-light">
+            {{ profile.title }} olarak; yöneticilere, teknoloji ve ürün takımlarına özel, sonuç odaklı modern koçluk ve strateji çözümleri sunuyorum.
           </p>
 
-          <p class="text-base text-slate-600 dark:text-slate-400 leading-relaxed font-sans font-light">
+          <p class="text-base text-slate-400 leading-relaxed font-sans font-light">
             {{ profile.bio }}
           </p>
 
-          <div class="flex flex-wrap gap-4 pt-2">
-            <span class="inline-flex items-center px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300">
-              🏆 ICF Professional Coach
+          <div class="flex flex-wrap gap-3 pt-2">
+            <span class="inline-flex items-center space-x-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-xs font-semibold text-cyan-300">
+              <UIcon name="i-heroicons-check-badge" class="w-4 h-4" />
+              <span>ICF Professional Coach</span>
             </span>
-            <span class="inline-flex items-center px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300">
-              ⚡ Certified Agile Leader
+            <span class="inline-flex items-center space-x-2 px-4 py-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-xs font-semibold text-emerald-300">
+              <UIcon name="i-heroicons-bolt" class="w-4 h-4" />
+              <span>Certified Agile Leader</span>
             </span>
-            <span class="inline-flex items-center px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300">
-              🛠 Scrum Alliance PO
+            <span class="inline-flex items-center space-x-2 px-4 py-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-xs font-semibold text-indigo-300">
+              <UIcon name="i-heroicons-academic-cap" class="w-4 h-4" />
+              <span>Scrum Alliance PO</span>
             </span>
           </div>
         </div>
 
         <!-- Image -->
         <div class="lg:col-span-5 flex justify-center">
-          <div class="relative w-80 h-[450px] rounded-[40px] overflow-hidden shadow-2xl border-4 border-white dark:border-slate-800">
+          <div class="relative w-80 h-[460px] sm:w-96 sm:h-[500px] rounded-[44px] overflow-hidden shadow-2xl border border-slate-800 bg-slate-900">
             <img
               :src="profile.avatar"
               :alt="profile.name"
-              loading="lazy"
+              loading="eager"
               decoding="async"
-              class="w-full h-full object-cover"
+              class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500"
             />
           </div>
         </div>
@@ -156,80 +160,53 @@ watchEffect(() => {
     </section>
 
     <!-- Values Section -->
-    <section class="bg-slate-50 dark:bg-slate-950 py-16 border-y border-slate-100 dark:border-slate-900">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white font-serif mb-12 text-center">
-          Çalışma Değerlerim
-        </h2>
+    <section class="bg-slate-900/60 py-20 border-y border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div class="text-center max-w-2xl mx-auto space-y-3">
+          <span class="text-xs font-bold font-mono text-cyan-400 uppercase tracking-widest">Çalışma İlkelerim</span>
+          <h2 class="text-3xl font-bold font-serif text-white">Değerlerim ve Dönüşüm Felsefem</h2>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div
             v-for="(val, idx) in values"
             :key="idx"
-            class="bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-8 hover:shadow-lg transition-all duration-300"
+            class="bg-slate-950 border border-slate-800 p-8 rounded-3xl space-y-3 hover:border-cyan-500/40 transition-colors shadow-lg"
           >
-            <span class="text-3xl mb-4 block">💡</span>
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-3">
-              {{ val.title }}
-            </h3>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-light">
-              {{ val.desc }}
-            </p>
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+              <UIcon name="i-heroicons-sparkles" class="w-5 h-5" />
+            </div>
+            <h3 class="text-lg font-bold text-white font-serif">{{ val.title }}</h3>
+            <p class="text-xs text-slate-400 leading-relaxed font-light">{{ val.desc }}</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Experience Timeline -->
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white font-serif mb-16 text-center">
-        Kariyer Yolculuğum
-      </h2>
+    <!-- Career Timeline -->
+    <section class="py-24 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      <div class="text-center space-y-3">
+        <span class="text-xs font-bold font-mono text-cyan-400 uppercase tracking-widest">Kariyer Yolculuğu</span>
+        <h2 class="text-3xl font-bold font-serif text-white">Deneyim & Dönüm Noktaları</h2>
+      </div>
 
-      <div class="relative border-l border-slate-200 dark:border-slate-800 ml-4 md:ml-0 space-y-12">
+      <div class="space-y-6">
         <div
-          v-for="(job, idx) in timeline"
+          v-for="(t, idx) in timeline"
           :key="idx"
-          class="relative pl-8 md:pl-12"
+          class="bg-slate-900/80 border border-slate-800 p-8 rounded-3xl flex flex-col md:flex-row md:items-center justify-between gap-6 hover:border-cyan-500/40 transition-all shadow-xl"
         >
-          <!-- Bullet Point -->
-          <div class="absolute -left-[9px] top-1.5 w-4.5 h-4.5 rounded-full border-4 border-white dark:border-slate-950 bg-emerald-500" />
-          
           <div class="space-y-2">
-            <span class="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-              {{ job.year }}
+            <span class="text-xs font-mono font-bold text-cyan-400 bg-cyan-500/10 px-3 py-1 rounded-full border border-cyan-500/20">
+              {{ t.year }}
             </span>
-            
-            <h3 class="text-lg font-bold text-slate-900 dark:text-white">
-              {{ job.role }}
-            </h3>
-            
-            <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400">
-              {{ job.company }}
-            </span>
-            
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-light leading-relaxed pt-2">
-              {{ job.desc }}
+            <h3 class="text-xl font-bold text-white font-serif">{{ t.role }}</h3>
+            <span class="text-xs font-semibold text-slate-400 block">{{ t.company }}</span>
+            <p class="text-xs text-slate-400 leading-relaxed font-light max-w-2xl pt-1">
+              {{ t.desc }}
             </p>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Simple call to contact -->
-    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8">
-      <div class="bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-3xl p-8 sm:p-12 shadow-xl space-y-6">
-        <h3 class="text-xl sm:text-2xl font-bold font-serif">Kişisel Yol Haritanızı Çıkarmaya Başlayalım</h3>
-        <p class="text-sm text-emerald-50 font-light max-w-xl mx-auto">
-          İş hayatınızda veya ekibinizde yaşadığınız zorlukları analiz edip, size özel bir süreç başlatmak için benimle dilediğiniz zaman iletişime geçebilirsiniz.
-        </p>
-        <UButton
-          to="/iletisim"
-          color="neutral"
-          variant="solid"
-          class="bg-white hover:bg-slate-100 text-slate-900 rounded-full font-medium px-8 py-3.5"
-        >
-          İletişime Geçin
-        </UButton>
       </div>
     </section>
   </div>

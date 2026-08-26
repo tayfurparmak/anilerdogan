@@ -59,20 +59,21 @@ const filteredEducations = computed(() => {
 </script>
 
 <template>
-  <div class="py-12 space-y-16">
+  <div class="py-16 space-y-16 bg-slate-950 text-white min-h-screen">
     <!-- Header Hero -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto space-y-6">
-        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 dark:bg-emerald-500/15 px-3 py-1 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+        <div class="inline-flex items-center space-x-2 bg-slate-900 border border-cyan-500/30 px-4 py-1.5 rounded-full text-xs font-semibold text-cyan-400">
+          <UIcon name="i-heroicons-academic-cap" class="w-4 h-4" />
           <span>Profesyonel Akademi</span>
         </div>
         
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white font-serif leading-tight">
-          Liderlik ve Ürün Gelişim Programları
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-white font-serif leading-tight">
+          Liderlik ve AI Gelişim Programları
         </h1>
 
-        <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 leading-relaxed font-sans font-light">
-          İş hayatında fark yaratmanızı sağlayacak metodolojileri ve pratikleri kapsayan, sınırlı kontenjanlı canlı eğitim sınıfları.
+        <p class="text-base sm:text-lg text-slate-400 leading-relaxed font-sans font-light">
+          İş hayatında fark yaratmanızı sağlayacak metodolojileri ve pratikleri kapsayan, canlı eğitim sınıfları.
         </p>
       </div>
     </section>
@@ -81,14 +82,14 @@ const filteredEducations = computed(() => {
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       <!-- Levels Filter Tabs -->
       <div class="flex justify-center">
-        <div class="bg-slate-100 dark:bg-slate-900 p-1.5 rounded-full flex space-x-1 border border-slate-200/50 dark:border-slate-800/60">
+        <div class="bg-slate-900 p-1.5 rounded-full flex space-x-1 border border-slate-800">
           <button
             v-for="lvl in levels"
             :key="lvl"
-            class="px-5 py-2 rounded-full text-xs font-medium transition-all duration-300"
+            class="px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300"
             :class="selectedLevel === lvl
-              ? 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow'
-              : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'"
+              ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 shadow-md font-bold'
+              : 'text-slate-400 hover:text-white'"
             @click="selectedLevel = lvl"
           >
             {{ lvl }}
@@ -106,25 +107,25 @@ const filteredEducations = computed(() => {
       </div>
       
       <!-- Empty State -->
-      <div v-else class="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/50 dark:border-slate-800/40 max-w-lg mx-auto">
+      <div v-else class="text-center py-20 bg-slate-900/60 rounded-3xl border border-slate-800 max-w-lg mx-auto">
         <span class="text-4xl mb-4 block">🔍</span>
-        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Eğitim Bulunamadı</h3>
-        <p class="text-xs text-slate-400 font-light">Bu seviyede aktif bir eğitim programı bulunmamaktadır. Lütfen diğer filtrelere göz atın.</p>
+        <h3 class="text-base font-bold text-white mb-2">Eğitim Bulunamadı</h3>
+        <p class="text-xs text-slate-400 font-light">Bu seviyede aktif bir eğitim programı bulunmamaktadır.</p>
       </div>
     </section>
 
-    <!-- FAQ & Corporate Training Call -->
+    <!-- Corporate Training Call -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-      <div class="bg-gradient-to-r from-slate-900 to-slate-950 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 text-center space-y-6">
-        <h3 class="text-xl sm:text-2xl font-bold font-serif">Şirketinize Özel Kurumsal Sınıflar</h3>
+      <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 text-white rounded-3xl p-8 sm:p-12 border border-slate-800 text-center space-y-6 shadow-2xl">
+        <h3 class="text-xl sm:text-3xl font-bold font-serif">Şirketinize Özel Kurumsal Sınıflar</h3>
         <p class="text-sm text-slate-400 max-w-xl mx-auto leading-relaxed font-light">
-          Eğitimlerimi şirketinizin ihtiyaçlarına ve teknolojik altyapısına göre özelleştirerek, kurum içi ekipleriniz için özel kapalı gruplar halinde de organize edebiliyorum.
+          Eğitimlerimi şirketinizin teknik ihtiyaçlarına ve organizasyonel yapısına göre özelleştirerek kurumsal sınıflar halinde gerçekleştiriyorum.
         </p>
         <UButton
           to="/iletisim"
-          color="emerald"
+          color="primary"
           size="lg"
-          class="rounded-full px-8 py-3.5 font-medium"
+          class="rounded-full px-8 py-3.5 font-bold text-xs bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950"
         >
           Teklif Alın & Görüşelim
         </UButton>

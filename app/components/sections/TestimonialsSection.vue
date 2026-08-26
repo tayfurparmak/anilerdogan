@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { testimonialsData } from '~/data/mockData'
 
 const supabase = useSupabaseClient()
@@ -29,53 +30,61 @@ const testimonials = computed(() => {
       rating: 5
     }))
   }
-  // Fallback to local mock data
   return testimonialsData
 })
 </script>
 
 <template>
-  <section class="py-20 lg:py-24 bg-slate-50 dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800/40">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- Title -->
-      <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 dark:bg-emerald-500/15 px-3 py-1 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-          <span>Referanslar</span>
+  <section class="py-28 bg-slate-900 text-white relative border-b border-slate-800/60 overflow-hidden">
+    <!-- Ambient Glow -->
+    <div class="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 blur-[160px] pointer-events-none" />
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-20 space-y-4">
+        <div class="inline-flex items-center space-x-2 bg-slate-800 border border-cyan-500/30 px-4 py-1.5 rounded-full text-xs font-semibold text-cyan-400">
+          <UIcon name="i-heroicons-chat-bubble-bottom-center-text" class="w-4 h-4" />
+          <span>Client Trust & Testimonials</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white font-serif">
-          Danışan Yorumları
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight font-serif">
+          Liderlik Değerlendirmeleri
         </h2>
-        <p class="text-slate-500 dark:text-slate-400 leading-relaxed font-sans font-light">
-          Birlikte çalıştığımız yöneticilerin, ürün liderlerinin ve kurucuların başarı hikayeleri ve deneyimleri.
+        <p class="text-slate-400 text-base leading-relaxed font-light">
+          Birlikte dönüştüğümüz yöneticilerin, mühendislik liderlerinin ve kurucuların tecrübeleri.
         </p>
       </div>
 
-      <!-- Grid -->
+      <!-- Testimonial Showcase Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div
           v-for="item in testimonials"
           :key="item.id"
-          class="bg-white dark:bg-slate-900 border border-slate-200/50 dark:border-slate-800/40 rounded-3xl p-8 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+          class="bg-slate-950/80 border border-slate-800/80 rounded-[32px] p-8 hover:border-cyan-500/40 hover:bg-slate-950 transition-all duration-300 flex flex-col justify-between shadow-2xl group"
         >
-          <div>
-            <!-- Stars -->
-            <div class="flex space-x-1 mb-6">
-              <UIcon
-                v-for="star in 5"
-                :key="star"
-                name="i-heroicons-star"
-                class="w-4 h-4 text-amber-500"
-              />
+          <div class="space-y-6">
+            <!-- Stars & Trust Badge -->
+            <div class="flex items-center justify-between">
+              <div class="flex space-x-1">
+                <UIcon
+                  v-for="star in 5"
+                  :key="star"
+                  name="i-heroicons-star"
+                  class="w-4 h-4 text-amber-400 fill-amber-400"
+                />
+              </div>
+              <span class="text-[10px] font-mono font-bold text-cyan-400 uppercase tracking-widest bg-cyan-500/10 px-2.5 py-1 rounded-full border border-cyan-500/20">
+                Doğrulanmış Referans
+              </span>
             </div>
 
-            <!-- Quote -->
-            <p class="text-sm text-slate-600 dark:text-slate-400 italic leading-relaxed font-sans font-light mb-6">
+            <!-- Quote Text -->
+            <p class="text-sm text-slate-300 italic leading-relaxed font-sans font-light">
               "{{ item.quote }}"
             </p>
           </div>
 
-          <!-- Profile -->
-          <div class="pt-6 border-t border-slate-100 dark:border-slate-800/60 flex items-center space-x-4">
+          <!-- Profile Block -->
+          <div class="pt-6 border-t border-slate-800/60 flex items-center space-x-4 mt-6">
             <img
               :src="item.avatar"
               :alt="item.name + ' profil fotoğrafı'"
@@ -83,11 +92,11 @@ const testimonials = computed(() => {
               decoding="async"
               width="48"
               height="48"
-              class="w-12 h-12 rounded-full object-cover shrink-0"
+              class="w-12 h-12 rounded-2xl object-cover shrink-0 border border-slate-800 group-hover:border-cyan-500/40 transition-colors"
             />
-            <div>
-              <span class="block text-sm font-bold text-slate-900 dark:text-white">{{ item.name }}</span>
-              <span class="block text-xs text-slate-400">{{ item.role }}, {{ item.company }}</span>
+            <div class="flex flex-col">
+              <span class="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">{{ item.name }}</span>
+              <span class="text-xs text-slate-400 font-medium">{{ item.role }}, <span class="text-cyan-400">{{ item.company }}</span></span>
             </div>
           </div>
         </div>
