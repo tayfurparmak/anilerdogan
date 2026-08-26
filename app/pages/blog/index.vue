@@ -14,7 +14,6 @@ const categories = ['Tümü', 'Liderlik', 'Teknoloji & Yönetim', 'Kariyer']
 const selectedCategory = ref('Tümü')
 const searchQuery = ref('')
 
-// Pagination state
 const currentPage = ref(1)
 const itemsPerPage = 6
 const totalCount = ref(0)
@@ -24,7 +23,6 @@ const dbPosts = ref<any[]>([])
 
 const totalPages = computed(() => Math.ceil(totalCount.value / itemsPerPage))
 
-// Calculate read time based on word count
 const calculateReadTime = (content: string) => {
   if (!content) return '1 dk okuma'
   const cleanText = content.replace(/<\/?[^>]+(>|$)/g, "")
@@ -37,7 +35,6 @@ const fetchPublicPosts = async () => {
   isLoading.value = true
   isError.value = false
   try {
-    // 1. Fetch total count for pagination
     let countQuery = supabase
       .from('blog_posts')
       .select('*', { count: 'exact', head: true })
@@ -55,7 +52,6 @@ const fetchPublicPosts = async () => {
     if (countErr) throw countErr
     totalCount.value = count || 0
 
-    // 2. Fetch paginated records
     const from = (currentPage.value - 1) * itemsPerPage
     const to = from + itemsPerPage - 1
 
@@ -84,7 +80,6 @@ const fetchPublicPosts = async () => {
   }
 }
 
-// Watchers
 watch([currentPage, selectedCategory], () => {
   fetchPublicPosts()
 })
@@ -127,36 +122,37 @@ const posts = computed(() => {
 </script>
 
 <template>
-  <div class="py-12 space-y-16">
+  <div class="py-16 space-y-16 bg-slate-950 text-white min-h-screen">
     <!-- Header Hero -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto space-y-6">
-        <div class="inline-flex items-center space-x-2 bg-emerald-500/10 dark:bg-emerald-500/15 px-3 py-1 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+        <div class="inline-flex items-center space-x-2 bg-slate-900 border border-cyan-500/30 px-4 py-1.5 rounded-full text-xs font-semibold text-cyan-400">
+          <UIcon name="i-heroicons-document-text" class="w-4 h-4" />
           <span>Bilgi & Paylaşım</span>
         </div>
         
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 dark:text-white font-serif leading-tight">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-white font-serif leading-tight">
           Liderlik, Ürün ve Teknoloji Makaleleri
         </h1>
 
-        <p class="text-base sm:text-lg text-slate-500 dark:text-slate-400 leading-relaxed font-sans font-light">
-          İş hayatında karşılaşılan pratik problemlere yönelik çözümler, liderlik felsefeleri ve yönetim stratejileri üzerine kaleme aldığım içerikler.
+        <p class="text-base sm:text-lg text-slate-400 leading-relaxed font-sans font-light">
+          İş hayatında karşılaşılan pratik problemlere yönelik çözümler, liderlik felsefeleri ve yönetim stratejileri.
         </p>
       </div>
     </section>
 
     <!-- Filters & Search -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pb-6 border-b border-slate-200/50 dark:border-slate-800/50">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pb-6 border-b border-slate-800">
         <!-- Categories Tab -->
         <div class="flex flex-wrap gap-2">
           <button
             v-for="cat in categories"
             :key="cat"
-            class="px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 border"
+            class="px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 border"
             :class="selectedCategory === cat
-              ? 'bg-emerald-500 border-emerald-500 text-white'
-              : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/40'"
+              ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 border-transparent font-bold'
+              : 'border-slate-800 bg-slate-900 text-slate-400 hover:text-white hover:border-slate-700'"
             @click="selectedCategory = cat"
           >
             {{ cat }}
@@ -169,7 +165,7 @@ const posts = computed(() => {
             v-model="searchQuery"
             icon="i-heroicons-magnifying-glass"
             placeholder="Makalelerde ara..."
-            class="rounded-full"
+            class="rounded-full bg-slate-900 border-slate-800 text-white"
           />
         </div>
       </div>
@@ -179,14 +175,14 @@ const posts = computed(() => {
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Loading Skeleton -->
       <div v-if="isLoading" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="i in 3" :key="i" class="bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl overflow-hidden aspect-[4/3] animate-pulse" />
+        <div v-for="i in 3" :key="i" class="bg-slate-900 border border-slate-800 rounded-[32px] overflow-hidden aspect-[4/3] animate-pulse" />
       </div>
 
       <!-- Error State -->
-      <div v-else-if="isError" class="text-center py-20 bg-rose-500/5 dark:bg-rose-500/10 border border-rose-500/20 rounded-3xl max-w-lg mx-auto space-y-4">
+      <div v-else-if="isError" class="text-center py-20 bg-rose-500/10 border border-rose-500/20 rounded-[32px] max-w-lg mx-auto space-y-4">
         <span class="text-4xl">⚠️</span>
-        <h3 class="text-base font-bold text-slate-900 dark:text-white">Bağlantı Hatası</h3>
-        <p class="text-xs text-slate-400 max-w-xs mx-auto">Makaleler yüklenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</p>
+        <h3 class="text-base font-bold text-white">Bağlantı Hatası</h3>
+        <p class="text-xs text-slate-400 max-w-xs mx-auto">Makaleler yüklenirken bir hata oluştu.</p>
         <UButton color="primary" variant="soft" size="sm" class="rounded-full" @click="fetchPublicPosts">Yeniden Dene</UButton>
       </div>
 
@@ -201,22 +197,22 @@ const posts = computed(() => {
         </div>
 
         <!-- Pagination Controls -->
-        <div v-if="totalPages > 1" class="flex justify-center items-center space-x-2 pt-6">
+        <div v-if="totalPages > 1" class="flex justify-center items-center space-x-3 pt-6">
           <UButton
             variant="outline"
             color="neutral"
             size="sm"
-            class="rounded-full"
+            class="rounded-full border-slate-800 text-slate-300"
             icon="i-heroicons-chevron-left"
             :disabled="currentPage === 1"
             @click="currentPage--"
           />
-          <span class="text-xs text-slate-500">Sayfa {{ currentPage }} / {{ totalPages }}</span>
+          <span class="text-xs font-mono text-cyan-400">Sayfa {{ currentPage }} / {{ totalPages }}</span>
           <UButton
             variant="outline"
             color="neutral"
             size="sm"
-            class="rounded-full"
+            class="rounded-full border-slate-800 text-slate-300"
             icon="i-heroicons-chevron-right"
             :disabled="currentPage === totalPages"
             @click="currentPage++"
@@ -225,10 +221,10 @@ const posts = computed(() => {
       </div>
 
       <!-- Empty State -->
-      <div v-else class="text-center py-20 bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/50 dark:border-slate-800/40 max-w-lg mx-auto">
+      <div v-else class="text-center py-20 bg-slate-900/60 rounded-[32px] border border-slate-800 max-w-lg mx-auto">
         <span class="text-4xl mb-4 block">🔍</span>
-        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Makale Bulunamadı</h3>
-        <p class="text-xs text-slate-400 font-light">Arama teriminize veya kategorinize uygun bir yazı bulunamadı. Lütfen filtrelerinizi gözden geçirin.</p>
+        <h3 class="text-base font-bold text-white mb-2">Makale Bulunamadı</h3>
+        <p class="text-xs text-slate-400 font-light">Arama teriminize veya kategorinize uygun bir yazı bulunamadı.</p>
       </div>
     </section>
   </div>

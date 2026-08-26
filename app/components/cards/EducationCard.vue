@@ -7,9 +7,9 @@ defineProps<{
 </script>
 
 <template>
-  <div class="premium-card group bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800/80 rounded-3xl overflow-hidden hover:shadow-xl hover:border-emerald-500/30 dark:hover:border-emerald-500/20 flex flex-col h-full">
+  <div class="bg-slate-900/80 border border-slate-800/80 rounded-[32px] overflow-hidden hover:border-cyan-500/40 hover:bg-slate-900 transition-all duration-300 flex flex-col h-full shadow-2xl group">
     <!-- Image Header -->
-    <div class="relative h-48 overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0">
+    <div class="relative h-48 overflow-hidden bg-slate-950 shrink-0">
       <img
         :src="education.image"
         :alt="education.title"
@@ -18,49 +18,50 @@ defineProps<{
         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
       />
       <!-- Level Badge -->
-      <span class="absolute top-4 left-4 bg-slate-900/80 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">
+      <span class="absolute top-4 left-4 text-[10px] font-mono font-bold uppercase tracking-wider bg-slate-950/80 backdrop-blur-md border border-slate-800 text-cyan-400 px-3 py-1 rounded-full">
         {{ education.level }}
       </span>
     </div>
 
     <!-- Content -->
     <div class="p-6 flex flex-col justify-between flex-grow">
-      <div>
+      <div class="space-y-3">
         <!-- Title -->
-        <h3 class="text-lg font-bold text-slate-900 dark:text-white line-clamp-1 mb-2">
+        <h3 class="text-lg font-bold text-white line-clamp-1 font-serif group-hover:text-cyan-300 transition-colors">
           {{ education.title }}
         </h3>
         
         <!-- Description -->
-        <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed mb-4">
+        <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed font-light">
           {{ education.description }}
         </p>
 
         <!-- Features list -->
-        <ul class="space-y-2 mb-6">
+        <ul class="space-y-2 pt-2">
           <li
             v-for="(feature, idx) in education.features.slice(0, 3)"
             :key="idx"
-            class="flex items-center text-xs text-slate-600 dark:text-slate-400"
+            class="flex items-center text-xs text-slate-300 font-light"
           >
-            <UIcon name="i-heroicons-check" class="w-4 h-4 text-emerald-500 mr-2 shrink-0" />
+            <UIcon name="i-heroicons-check-circle" class="w-4 h-4 text-emerald-400 mr-2 shrink-0" />
             <span class="line-clamp-1">{{ feature }}</span>
           </li>
         </ul>
       </div>
 
       <!-- Card Footer -->
-      <div class="pt-4 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between mt-auto">
+      <div class="pt-6 border-t border-slate-800/60 flex items-center justify-between mt-6">
         <div class="text-xs">
-          <span class="text-slate-400 block">Süre: {{ education.duration }}</span>
-          <span class="text-slate-900 dark:text-white font-bold text-sm">{{ education.price }}</span>
+          <span class="text-slate-500 block text-[10px] uppercase font-mono">Süre: {{ education.duration }}</span>
+          <span class="text-white font-bold text-xs">{{ education.price }}</span>
         </div>
         
         <UButton
           to="/egitimler"
-          color="emerald"
+          color="primary"
           variant="outline"
-          class="rounded-full px-4 text-xs font-medium"
+          class="rounded-full px-5 py-2 text-xs font-bold border-slate-700 hover:border-cyan-400 text-slate-200"
+          aria-label="Eğitim programını inceleyin"
         >
           Kayıt Ol / İncele
         </UButton>

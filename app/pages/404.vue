@@ -8,24 +8,25 @@ useSeo(
 </script>
 
 <template>
-  <div class="py-20 flex flex-col items-center justify-center text-center space-y-6 max-w-xl mx-auto px-4">
-    <!-- Visual Accent -->
-    <span class="text-8xl select-none">🧭</span>
+  <div class="py-32 flex flex-col items-center justify-center text-center space-y-6 max-w-xl mx-auto px-4 bg-slate-950 text-white min-h-[70vh]">
+    <div class="w-20 h-20 rounded-3xl bg-slate-900 border border-slate-800 flex items-center justify-center text-cyan-400 text-4xl shadow-2xl">
+      🧭
+    </div>
     
-    <h1 class="text-4xl font-extrabold text-slate-900 dark:text-white font-serif tracking-tight">
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-white font-serif tracking-tight">
       Sayfa Bulunamadı
     </h1>
     
-    <p class="text-sm text-slate-500 dark:text-slate-400 font-sans font-light leading-relaxed">
-      Aradığınız sayfa kaldırılmış, adı değiştirilmiş veya geçici olarak kullanılamıyor olabilir. Lütfen ana sayfaya dönerek devam edin.
+    <p class="text-sm text-slate-400 font-sans font-light leading-relaxed">
+      Aradığınız sayfa kaldırılmış, adı değiştirilmiş veya geçici olarak kullanılamıyor olabilir.
     </p>
 
     <div class="pt-4">
       <UButton
         to="/"
-        color="emerald"
+        color="primary"
         size="lg"
-        class="rounded-full px-8 py-3.5 font-medium shadow-lg shadow-emerald-500/10"
+        class="rounded-full px-8 py-3.5 font-bold text-xs bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 shadow-xl shadow-cyan-500/20"
       >
         Ana Sayfaya Dön
       </UButton>
