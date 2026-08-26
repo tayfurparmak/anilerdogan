@@ -123,14 +123,14 @@ const savePost = async () => {
 
   // Check duplicate slug manually
   try {
-    const { data: existing, error: checkError } = await supabase
+    const { data: existing, error: checkError } = await (supabase
       .from('blog_posts')
       .select('id, slug')
-      .eq('slug', slug.value)
+      .eq('slug', slug.value) as any)
       
     if (checkError) throw checkError
     
-    const isDuplicate = existing && existing.some(item => item.id !== postId.value)
+    const isDuplicate = existing && (existing as any[]).some((item: any) => item.id !== postId.value)
     if (isDuplicate) {
       toast.add({ title: 'Çakışma Hatası', description: 'Bu URL adresi (slug) başka bir yazıda zaten kullanılıyor.', color: 'error' })
       isSubmitting.value = false
@@ -371,7 +371,7 @@ const filteredPosts = computed(() => {
     </div>
 
     <!-- Create/Edit Slideover Form -->
-    <USlideover v-model="isSlideoverOpen" class="z-50" :ui="{ width: 'max-w-2xl' }">
+    <USlideover v-model="isSlideoverOpen" class="z-50">
       <div class="p-6 h-full flex flex-col justify-between bg-white dark:bg-slate-900 overflow-y-auto">
         <div class="space-y-6">
           <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-4">

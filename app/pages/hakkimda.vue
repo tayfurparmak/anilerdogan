@@ -95,8 +95,8 @@ watchEffect(() => {
       script: [
         {
           type: 'application/ld+json',
-          children: JSON.stringify(personSchema)
-        }
+          innerHTML: JSON.stringify(personSchema)
+        } as any
       ]
     })
   }

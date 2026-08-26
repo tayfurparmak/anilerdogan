@@ -65,11 +65,11 @@ const fetchStats = async () => {
       const { data: recentMsg } = await supabase.from('contact_messages').select('name, email, message, created_at').order('created_at', { ascending: false }).limit(3) as any
       
       recentContent.value = [
-        ...(recentSrv || []).map(s => ({ type: 'Hizmet', title: s.title, date: 'Yeni' })),
-        ...(recentB || []).map(b => ({ type: 'Makale', title: b.title, date: 'Yeni' }))
+        ...(recentSrv || []).map((s: any) => ({ type: 'Hizmet', title: s.title, date: 'Yeni' })),
+        ...(recentB || []).map((b: any) => ({ type: 'Makale', title: b.title, date: 'Yeni' }))
       ]
       
-      recentMessages.value = (recentMsg || []).map(m => ({
+      recentMessages.value = (recentMsg || []).map((m: any) => ({
         name: m.name,
         email: m.email,
         message: m.message,
