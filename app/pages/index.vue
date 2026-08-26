@@ -31,7 +31,7 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Anıl Erdoğan Yönetici Koçluğu ve Yönetim Danışmanlığı",
-  "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=1200",
+  "image": "https://anilerdogan.com/anil-erdogan.png",
   "@id": "https://anilerdogan.com/#service",
   "url": "https://anilerdogan.com",
   "telephone": "+905320000000",

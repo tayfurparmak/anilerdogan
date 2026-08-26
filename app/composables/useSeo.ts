@@ -9,7 +9,7 @@ export function useSeo(title?: string, description?: string, image?: string) {
   const siteName = siteSettings.value?.site_name || 'Anıl Erdoğan'
   const defaultTitle = siteSettings.value?.default_seo_title || 'Anıl Erdoğan | Yönetici Koçu & Yönetim Danışmanı'
   const defaultDesc = siteSettings.value?.default_seo_description || 'Yönetici koçluğu, takım kültürü, teknolojik liderlik ve kariyer gelişimi danışmanlığı.'
-  const defaultOgImage = siteSettings.value?.default_og_image || 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=1200'
+  const defaultOgImage = siteSettings.value?.default_og_image || 'https://anilerdogan.com/anil-erdogan.png'
 
   const finalTitle = title ? `${title} | ${siteName}` : defaultTitle
   const finalDesc = description || defaultDesc

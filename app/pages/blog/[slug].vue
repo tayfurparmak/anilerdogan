@@ -73,7 +73,7 @@ const post = computed(() => {
       author: {
         name: 'Anıl Erdoğan',
         role: 'Yönetici Koçu',
-        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150'
+        avatar: '/anil-erdogan.png'
       }
     }
   }

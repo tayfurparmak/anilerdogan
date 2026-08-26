@@ -5,7 +5,7 @@ export const profileData: Profile = {
   name: 'Anıl Erdoğan',
   title: 'Yönetici Koçu & Teknoloji Stratejisi Danışmanı',
   bio: '15 yılı aşkın süredir teknoloji, ürün yönetimi ve organizasyonel gelişim alanlarında edindiğim tecrübeyle; liderlerin potansiyellerini açığa çıkarmalarına, ekiplerin yüksek performanslı yapılar kurmalarına ve şirketlerin dijital dönüşüm süreçlerini başarıyla yönetmelerine rehberlik ediyorum.',
-  avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=600',
+  avatar: '/anil-erdogan.png',
   socialLinks: {
     linkedin: 'https://linkedin.com/in/anilerdogan',
     twitter: 'https://twitter.com/anilerdogan',
@@ -178,7 +178,7 @@ Liderlik tarzınıza empatiyi entegre etmek için şu basit adımlarla başlayab
     author: {
       name: 'Anıl Erdoğan',
       role: 'Yönetici Koçu',
-      avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150'
+      avatar: '/anil-erdogan.png'
     }
   },
   {
@@ -218,7 +218,7 @@ Kültür bir günde kurulmaz, sürekli bakım ister. Her sprint veya proje sonun
     author: {
       name: 'Anıl Erdoğan',
       role: 'Teknoloji Danışmanı',
-      avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150'
+      avatar: '/anil-erdogan.png'
     }
   },
   {
@@ -252,7 +252,7 @@ Bir anda istifa etmek yerine, geçiş sürecini planlı yönetin. Yan projeler (
     author: {
       name: 'Anıl Erdoğan',
       role: 'Kariyer Mentoru',
-      avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=150'
+      avatar: '/anil-erdogan.png'
     }
   }
 ]
