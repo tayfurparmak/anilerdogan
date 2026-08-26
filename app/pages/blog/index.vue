@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import BlogCard from '~/components/cards/BlogCard.vue'
+import AppPagination from '~/components/ui/AppPagination.vue'
 import { useSeo } from '~/composables/useSeo'
 
 useSeo(
@@ -126,12 +127,12 @@ const posts = computed(() => {
     <!-- Header Hero -->
     <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto space-y-6">
-        <div class="inline-flex items-center space-x-2 bg-slate-900 border border-cyan-500/30 px-4 py-1.5 rounded-full text-xs font-semibold text-cyan-400">
+        <div class="inline-flex items-center space-x-2 bg-slate-900 border border-cyan-500/30 px-4 py-1.5 rounded-full text-xs font-semibold text-cyan-400 animate-pulse-glow">
           <UIcon name="i-heroicons-document-text" class="w-4 h-4" />
           <span>Bilgi & Paylaşım</span>
         </div>
         
-        <h1 class="text-4xl sm:text-5xl font-extrabold text-white font-serif leading-tight">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-white font-serif leading-tight tracking-tight">
           Liderlik, Ürün ve Teknoloji Makaleleri
         </h1>
 
@@ -151,7 +152,7 @@ const posts = computed(() => {
             :key="cat"
             class="px-5 py-2 rounded-full text-xs font-semibold transition-all duration-300 border"
             :class="selectedCategory === cat
-              ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 border-transparent font-bold'
+              ? 'bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-950 border-transparent font-bold shadow-md shadow-cyan-500/20'
               : 'border-slate-800 bg-slate-900 text-slate-400 hover:text-white hover:border-slate-700'"
             @click="selectedCategory = cat"
           >
@@ -186,7 +187,7 @@ const posts = computed(() => {
         <UButton color="primary" variant="soft" size="sm" class="rounded-full" @click="fetchPublicPosts">Yeniden Dene</UButton>
       </div>
 
-      <!-- Content Grid -->
+      <!-- Content Grid & Dedicated Pagination -->
       <div v-else-if="posts.length > 0" class="space-y-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <BlogCard
@@ -196,28 +197,14 @@ const posts = computed(() => {
           />
         </div>
 
-        <!-- Pagination Controls -->
-        <div v-if="totalPages > 1" class="flex justify-center items-center space-x-3 pt-6">
-          <UButton
-            variant="outline"
-            color="neutral"
-            size="sm"
-            class="rounded-full border-slate-800 text-slate-300"
-            icon="i-heroicons-chevron-left"
-            :disabled="currentPage === 1"
-            @click="currentPage--"
-          />
-          <span class="text-xs font-mono text-cyan-400">Sayfa {{ currentPage }} / {{ totalPages }}</span>
-          <UButton
-            variant="outline"
-            color="neutral"
-            size="sm"
-            class="rounded-full border-slate-800 text-slate-300"
-            icon="i-heroicons-chevron-right"
-            :disabled="currentPage === totalPages"
-            @click="currentPage++"
-          />
-        </div>
+        <!-- Dedicated Reusable AppPagination Component -->
+        <AppPagination
+          v-if="totalPages > 1"
+          v-model:current-page="currentPage"
+          :total-pages="totalPages"
+          :total-items="totalCount"
+          :items-per-page="itemsPerPage"
+        />
       </div>
 
       <!-- Empty State -->

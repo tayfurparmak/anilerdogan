@@ -4,10 +4,15 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui', '@nuxtjs/supabase'],
   css: ['~/assets/css/main.css'],
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+    classSuffix: ''
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
-      htmlAttrs: { lang: 'tr' },
+      htmlAttrs: { lang: 'tr', class: 'dark' },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }

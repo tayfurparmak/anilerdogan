@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 @import "tailwindcss";
 @import "@nuxt/ui";
@@ -6,11 +6,14 @@
 :root {
   --font-sans: 'Inter', sans-serif;
   --font-serif: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 html {
   font-family: var(--font-sans);
   scroll-behavior: smooth;
+  background-color: #090D16;
+  color: #F8FAFC;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -18,48 +21,102 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.02em;
 }
 
-/* Custom premium design classes */
-.glass-effect {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+/* Keyframe Micro-Animations */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
 }
 
-.dark .glass-effect {
-  background: rgba(15, 23, 42, 0.65);
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes border-shimmer {
+  0% {
+    border-color: rgba(6, 182, 212, 0.2);
+  }
+  50% {
+    border-color: rgba(6, 182, 212, 0.6);
+  }
+  100% {
+    border-color: rgba(6, 182, 212, 0.2);
+  }
+}
+
+/* Custom Animation Utility Classes */
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-shimmer-border {
+  animation: border-shimmer 3s ease-in-out infinite;
+}
+
+/* Glassmorphism Classes */
+.glass-effect {
+  background: rgba(9, 13, 22, 0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(51, 65, 85, 0.5);
+  border: 1px solid rgba(30, 41, 59, 0.8);
 }
 
 /* Page transitions */
 .page-enter-active,
 .page-leave-active {
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .page-enter-from {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(16px);
 }
 .page-leave-to {
   opacity: 0;
-  transform: translateY(-12px);
+  transform: translateY(-16px);
 }
 
-/* Smooth scrollbar */
+/* Custom Smooth scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: #090D16;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.3);
+  background: rgba(51, 65, 85, 0.6);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.5);
+  background: rgba(6, 182, 212, 0.5);
 }
 
 /* Card hover animation defaults */
@@ -70,11 +127,11 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateY(-6px);
 }
 
-/* Focus-visible styles for keyboard navigation */
+/* Focus-visible styles for keyboard accessibility */
 :focus-visible {
-  outline: 2px solid #10b981;
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline: 2px solid #06B6D4;
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 button:focus-visible,
@@ -82,25 +139,18 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #10b981;
-  outline-offset: 2px;
+  outline: 2px solid #06B6D4;
+  outline-offset: 3px;
 }
 
-/* Reduce motion for users who prefer it */
+/* Reduce motion accessibility fallback */
 @media (prefers-reduced-motion: reduce) {
   .page-enter-active,
-  .page-leave-active {
-    transition: none;
-  }
-  .premium-card {
-    transition: none;
-  }
-  .premium-card:hover {
-    transform: none;
-  }
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  .page-leave-active,
+  .animate-float-slow,
+  .animate-pulse-glow,
+  .animate-fade-in-up {
+    animation: none !important;
+    transition: none !important;
   }
 }

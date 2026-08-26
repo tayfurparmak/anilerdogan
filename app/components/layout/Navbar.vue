@@ -1,16 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const colorMode = useColorMode()
-const isDark = computed({
-  get () {
-    return colorMode.value === 'dark'
-  },
-  set () {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark'
-  }
-})
-
 const isOpen = ref(false)
 
 const navLinks = [
@@ -33,7 +23,7 @@ const closeMenu = () => {
 </script>
 
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/60 shadow-2xl">
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800/80 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-20">
         <!-- Logo -->
@@ -47,14 +37,14 @@ const closeMenu = () => {
             <span class="text-lg font-bold tracking-tight text-white group-hover:text-cyan-400 transition-colors">
               Anıl Erdoğan
             </span>
-            <span class="text-[10px] font-semibold tracking-widest text-slate-400 uppercase">
+            <span class="text-[10px] font-semibold tracking-widest text-slate-400 uppercase font-mono">
               AI & Tech Leadership
             </span>
           </div>
         </NuxtLink>
 
         <!-- Desktop Navigation Links -->
-        <nav class="hidden md:flex items-center space-x-1 bg-slate-900/60 border border-slate-800/80 px-4 py-1.5 rounded-full backdrop-blur-md">
+        <nav class="hidden md:flex items-center space-x-1 bg-slate-900/80 border border-slate-800 px-4 py-1.5 rounded-full backdrop-blur-md">
           <NuxtLink
             v-for="link in navLinks"
             :key="link.to"
@@ -66,19 +56,8 @@ const closeMenu = () => {
           </NuxtLink>
         </nav>
 
-        <!-- Desktop Actions -->
+        <!-- Desktop Action -->
         <div class="hidden md:flex items-center space-x-4">
-          <!-- Dark/Light Theme Toggle -->
-          <UButton
-            variant="ghost"
-            color="neutral"
-            :icon="isDark ? 'i-heroicons-sun' : 'i-heroicons-moon'"
-            class="rounded-full text-slate-400 hover:text-cyan-400"
-            aria-label="Tema Değiştir"
-            @click="isDark = !isDark"
-          />
-          
-          <!-- Primary CTA Button -->
           <UButton
             to="/iletisim"
             color="primary"
@@ -88,23 +67,14 @@ const closeMenu = () => {
           </UButton>
         </div>
 
-        <!-- Mobile Menu Controls -->
+        <!-- Mobile Menu Control -->
         <div class="flex items-center space-x-2 md:hidden">
-          <UButton
-            variant="ghost"
-            color="neutral"
-            :icon="isDark ? 'i-heroicons-sun' : 'i-heroicons-moon'"
-            class="rounded-full text-slate-300"
-            aria-label="Tema Değiştir"
-            @click="isDark = !isDark"
-          />
-
           <UButton
             variant="ghost"
             color="neutral"
             :icon="isOpen ? 'i-heroicons-x-mark' : 'i-heroicons-bars-3'"
             class="rounded-full text-slate-300"
-            aria-label="Menü"
+            aria-label="Menüyü Aç/Kapat"
             @click="toggleMenu"
           />
         </div>
