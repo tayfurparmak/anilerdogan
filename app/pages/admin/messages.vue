@@ -16,7 +16,7 @@ const sortBy = ref('Tarih (En Yeni)') // Tarih (En Yeni), Tarih (En Eski), Ad So
 
 // Modals
 const isConfirmDeleteOpen = ref(false)
-const deleteTargetId = ref<number | null>(null)
+const deleteTargetId = ref<string | number | null>(null)
 const activeMessage = ref<any | null>(null)
 const isViewModalOpen = ref(false)
 
@@ -72,7 +72,7 @@ const openViewMessage = async (item: any) => {
   }
 }
 
-const triggerDelete = (id: number) => {
+const triggerDelete = (id: string | number) => {
   deleteTargetId.value = id
   isConfirmDeleteOpen.value = true
 }

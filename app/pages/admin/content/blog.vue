@@ -18,10 +18,10 @@ const sortBy = ref('Tarih (En Yeni)') // Tarih (En Yeni), Tarih (En Eski), Başl
 // Modals
 const isSlideoverOpen = ref(false)
 const isConfirmDeleteOpen = ref(false)
-const deleteTargetId = ref<number | null>(null)
+const deleteTargetId = ref<string | number | null>(null)
 
 // Form fields
-const postId = ref<number | null>(null)
+const postId = ref<string | number | null>(null)
 const title = ref('')
 const slug = ref('')
 const excerpt = ref('')
@@ -202,7 +202,7 @@ const togglePublish = async (item: any) => {
   }
 }
 
-const triggerDelete = (id: number) => {
+const triggerDelete = (id: string | number) => {
   deleteTargetId.value = id
   isConfirmDeleteOpen.value = true
 }

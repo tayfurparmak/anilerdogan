@@ -18,10 +18,10 @@ const sortBy = ref('Sıralama Sırası') // Sıralama Sırası, Başlık (A-Z), 
 // Modals
 const isSlideoverOpen = ref(false)
 const isConfirmDeleteOpen = ref(false)
-const deleteTargetId = ref<number | null>(null)
+const deleteTargetId = ref<string | number | null>(null)
 
 // Form fields
-const eduId = ref<number | null>(null)
+const eduId = ref<string | number | null>(null)
 const title = ref('')
 const institution = ref('Anıl Erdoğan Akademi')
 const description = ref('')
@@ -130,7 +130,7 @@ const togglePublish = async (item: any) => {
   }
 }
 
-const triggerDelete = (id: number) => {
+const triggerDelete = (id: string | number) => {
   deleteTargetId.value = id
   isConfirmDeleteOpen.value = true
 }

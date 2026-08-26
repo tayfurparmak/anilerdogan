@@ -18,10 +18,10 @@ const sortBy = ref('Sıralama Sırası') // Sıralama Sırası, İsim (A-Z), İs
 // Modals
 const isSlideoverOpen = ref(false)
 const isConfirmDeleteOpen = ref(false)
-const deleteTargetId = ref<number | null>(null)
+const deleteTargetId = ref<string | number | null>(null)
 
 // Form fields
-const testimonialId = ref<number | null>(null)
+const testimonialId = ref<string | number | null>(null)
 const name = ref('')
 const position = ref('')
 const company = ref('')
@@ -134,7 +134,7 @@ const togglePublish = async (item: any) => {
   }
 }
 
-const triggerDelete = (id: number) => {
+const triggerDelete = (id: string | number) => {
   deleteTargetId.value = id
   isConfirmDeleteOpen.value = true
 }
